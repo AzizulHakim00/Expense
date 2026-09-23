@@ -4,7 +4,10 @@ import com.expensetracker.service.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+<<<<<<< HEAD
 import org.springframework.security.core.Authentication;
+=======
+>>>>>>> ddc854d9aa2bb888f13a42a657cf261d844435f8
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -36,6 +39,7 @@ public class SecurityConfig {
         http
                 .userDetailsService(userDetailsService)
                 .authorizeHttpRequests(auth -> auth
+<<<<<<< HEAD
                         .requestMatchers(
                                 "/",
                                 "/login",
@@ -44,6 +48,9 @@ public class SecurityConfig {
                                 "/css/**",
                                 "/images/**"
                         ).permitAll()
+=======
+                        .requestMatchers("/", "/login", "/register", "/health", "/css/**", "/images/**").permitAll()
+>>>>>>> ddc854d9aa2bb888f13a42a657cf261d844435f8
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/dashboard", "/expenses/**").hasAnyRole("USER", "ADMIN")
                         .anyRequest().authenticated()
@@ -65,9 +72,13 @@ public class SecurityConfig {
                         .logoutSuccessUrl("/login?logout")
                         .permitAll()
                 )
+<<<<<<< HEAD
                 .exceptionHandling(exception -> exception
                         .accessDeniedPage("/access-denied")
                 );
+=======
+                .exceptionHandling(exception -> exception.accessDeniedPage("/access-denied"));
+>>>>>>> ddc854d9aa2bb888f13a42a657cf261d844435f8
 
         return http.build();
     }

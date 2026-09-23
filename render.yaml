@@ -1,15 +1,31 @@
 services:
   - type: web
+<<<<<<< HEAD
     name: expense-tracker
     runtime: docker
     plan: free
     dockerfilePath: ./Dockerfile
     dockerContext: .
     healthCheckPath: /health
+=======
+    name: expense-tracker-azizul
+    runtime: docker
+    plan: free
+    region: singapore
+    branch: main
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    autoDeploy: true
+>>>>>>> ddc854d9aa2bb888f13a42a657cf261d844435f8
     envVars:
       - key: MONGODB_URI
         sync: false
       - key: MONGODB_DATABASE
+<<<<<<< HEAD
         value: expense_db
+=======
+        value: mission_db
+>>>>>>> ddc854d9aa2bb888f13a42a657cf261d844435f8
       - key: THYMELEAF_CACHE
         value: "true"

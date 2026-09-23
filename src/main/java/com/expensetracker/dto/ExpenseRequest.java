@@ -10,7 +10,10 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class ExpenseRequest {
+<<<<<<< HEAD
 
+=======
+>>>>>>> ddc854d9aa2bb888f13a42a657cf261d844435f8
     @NotBlank(message = "Title is required")
     @Size(max = 100, message = "Title must be 100 characters or less")
     private String title;
@@ -29,6 +32,7 @@ public class ExpenseRequest {
     @Size(max = 300, message = "Note must be 300 characters or less")
     private String note;
 
+<<<<<<< HEAD
     public String getTitle() {
         return title;
     }
@@ -68,4 +72,16 @@ public class ExpenseRequest {
     public void setNote(String note) {
         this.note = note;
     }
+=======
+    public String getTitle(){return title;}
+    public void setTitle(String title){this.title=title;}
+    public BigDecimal getAmount(){return amount;}
+    public void setAmount(BigDecimal amount){this.amount=amount;}
+    public String getCategory(){return category;}
+    public void setCategory(String category){this.category=category;}
+    public LocalDate getExpenseDate(){return expenseDate;}
+    public void setExpenseDate(LocalDate expenseDate){this.expenseDate=expenseDate;}
+    public String getNote(){return note;}
+    public void setNote(String note){this.note=note;}
+>>>>>>> ddc854d9aa2bb888f13a42a657cf261d844435f8
 }

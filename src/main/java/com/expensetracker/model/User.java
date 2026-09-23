@@ -8,6 +8,7 @@ import java.time.Instant;
 
 @Document(collection = "users")
 public class User {
+<<<<<<< HEAD
 
     @Id
     private String id;
@@ -83,4 +84,32 @@ public class User {
     public void setCreatedAt(Instant createdAt) {
         this.createdAt = createdAt;
     }
+=======
+    @Id
+    private String id;
+    private String fullName;
+    @Indexed(unique = true)
+    private String email;
+    private String password;
+    private Role role = Role.USER;
+    private Boolean enabled = true;
+    private Instant createdAt = Instant.now();
+
+    public User() {}
+
+    public String getId(){return id;}
+    public void setId(String id){this.id=id;}
+    public String getFullName(){return fullName;}
+    public void setFullName(String fullName){this.fullName=fullName;}
+    public String getEmail(){return email;}
+    public void setEmail(String email){this.email=email;}
+    public String getPassword(){return password;}
+    public void setPassword(String password){this.password=password;}
+    public Role getRole(){return role == null ? Role.USER : role;}
+    public void setRole(Role role){this.role=role;}
+    public boolean isEnabled(){return enabled == null || enabled;}
+    public void setEnabled(Boolean enabled){this.enabled=enabled;}
+    public Instant getCreatedAt(){return createdAt;}
+    public void setCreatedAt(Instant createdAt){this.createdAt=createdAt;}
+>>>>>>> ddc854d9aa2bb888f13a42a657cf261d844435f8
 }

@@ -3,4 +3,7 @@ target/
 *.iml
 .env
 .DS_Store
+<<<<<<< HEAD
 *.log
+=======
+>>>>>>> ddc854d9aa2bb888f13a42a657cf261d844435f8

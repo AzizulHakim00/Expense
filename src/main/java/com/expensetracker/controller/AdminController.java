@@ -18,7 +18,10 @@ import java.util.Map;
 
 @Controller
 public class AdminController {
+<<<<<<< HEAD
 
+=======
+>>>>>>> ddc854d9aa2bb888f13a42a657cf261d844435f8
     private final UserService userService;
     private final ExpenseService expenseService;
 
@@ -34,9 +37,13 @@ public class AdminController {
         List<Expense> expenses = expenseService.allForAdmin();
 
         Map<String, String> ownerEmails = new HashMap<>();
+<<<<<<< HEAD
         for (User user : users) {
             ownerEmails.put(user.getId(), user.getEmail());
         }
+=======
+        for (User user : users) ownerEmails.put(user.getId(), user.getEmail());
+>>>>>>> ddc854d9aa2bb888f13a42a657cf261d844435f8
 
         model.addAttribute("currentAdmin", currentAdmin);
         model.addAttribute("users", users);

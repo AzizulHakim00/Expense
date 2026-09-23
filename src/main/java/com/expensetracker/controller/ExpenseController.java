@@ -10,11 +10,15 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+=======
+import org.springframework.web.bind.annotation.*;
+>>>>>>> ddc854d9aa2bb888f13a42a657cf261d844435f8
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
@@ -22,7 +26,10 @@ import java.util.List;
 
 @Controller
 public class ExpenseController {
+<<<<<<< HEAD
 
+=======
+>>>>>>> ddc854d9aa2bb888f13a42a657cf261d844435f8
     private final UserService userService;
     private final ExpenseService expenseService;
 
@@ -157,12 +164,17 @@ public class ExpenseController {
     }
 
     private String normalizePeriod(String period) {
+<<<<<<< HEAD
         if ("week".equalsIgnoreCase(period)) {
             return "week";
         }
         if ("month".equalsIgnoreCase(period)) {
             return "month";
         }
+=======
+        if ("week".equalsIgnoreCase(period)) return "week";
+        if ("month".equalsIgnoreCase(period)) return "month";
+>>>>>>> ddc854d9aa2bb888f13a42a657cf261d844435f8
         return "all";
     }
 }

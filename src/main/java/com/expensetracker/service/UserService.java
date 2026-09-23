@@ -14,7 +14,10 @@ import java.util.Locale;
 
 @Service
 public class UserService {
+<<<<<<< HEAD
 
+=======
+>>>>>>> ddc854d9aa2bb888f13a42a657cf261d844435f8
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
@@ -55,10 +58,13 @@ public class UserService {
         return userRepository.findAll();
     }
 
+<<<<<<< HEAD
     public long countUsers() {
         return userRepository.count();
     }
 
+=======
+>>>>>>> ddc854d9aa2bb888f13a42a657cf261d844435f8
     public void toggleEnabled(String userId, String currentAdminEmail) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));

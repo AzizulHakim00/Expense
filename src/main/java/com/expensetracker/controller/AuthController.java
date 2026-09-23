@@ -19,7 +19,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class AuthController {
+<<<<<<< HEAD
 
+=======
+>>>>>>> ddc854d9aa2bb888f13a42a657cf261d844435f8
     private final UserService userService;
 
     public AuthController(UserService userService) {
@@ -46,6 +49,7 @@ public class AuthController {
             User user = userService.currentUser(authentication);
             return user.getRole() == Role.ADMIN ? "redirect:/admin/dashboard" : "redirect:/dashboard";
         }
+<<<<<<< HEAD
 
         if (error != null) {
             model.addAttribute("errorMessage", "Invalid email/password or the account is disabled.");
@@ -53,14 +57,22 @@ public class AuthController {
         if (logout != null) {
             model.addAttribute("successMessage", "You have been logged out successfully.");
         }
+=======
+        if (error != null) model.addAttribute("errorMessage", "Invalid email/password or the account is disabled.");
+        if (logout != null) model.addAttribute("successMessage", "You have been logged out successfully.");
+>>>>>>> ddc854d9aa2bb888f13a42a657cf261d844435f8
         return "auth/login";
     }
 
     @GetMapping("/register")
     public String registerPage(Authentication authentication, Model model) {
+<<<<<<< HEAD
         if (isLoggedIn(authentication)) {
             return "redirect:/dashboard";
         }
+=======
+        if (isLoggedIn(authentication)) return "redirect:/dashboard";
+>>>>>>> ddc854d9aa2bb888f13a42a657cf261d844435f8
         if (!model.containsAttribute("registerRequest")) {
             model.addAttribute("registerRequest", new RegisterRequest());
         }
@@ -73,6 +85,7 @@ public class AuthController {
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes
     ) {
+<<<<<<< HEAD
         if (!request.getPassword().equals(request.getConfirmPassword())) {
             bindingResult.rejectValue("confirmPassword", "password.mismatch", "Passwords do not match");
         }
@@ -80,6 +93,13 @@ public class AuthController {
         if (bindingResult.hasErrors()) {
             return "auth/register";
         }
+=======
+        if (request.getPassword() != null && !request.getPassword().equals(request.getConfirmPassword())) {
+            bindingResult.rejectValue("confirmPassword", "password.mismatch", "Passwords do not match");
+        }
+
+        if (bindingResult.hasErrors()) return "auth/register";
+>>>>>>> ddc854d9aa2bb888f13a42a657cf261d844435f8
 
         try {
             userService.register(request);
@@ -88,10 +108,15 @@ public class AuthController {
             return "auth/register";
         }
 
+<<<<<<< HEAD
         redirectAttributes.addFlashAttribute(
                 "successMessage",
                 "Registration successful. Please log in with your new account."
         );
+=======
+        redirectAttributes.addFlashAttribute("successMessage",
+                "Registration successful. Please log in with your new account.");
+>>>>>>> ddc854d9aa2bb888f13a42a657cf261d844435f8
         return "redirect:/login";
     }
 

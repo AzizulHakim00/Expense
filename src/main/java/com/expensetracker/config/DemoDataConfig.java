@@ -16,7 +16,10 @@ import java.time.LocalDate;
 
 @Configuration
 public class DemoDataConfig {
+<<<<<<< HEAD
 
+=======
+>>>>>>> ddc854d9aa2bb888f13a42a657cf261d844435f8
     public static final String ADMIN_EMAIL = "admin@expense.local";
     public static final String ADMIN_PASSWORD = "Admin123!";
     public static final String USER_EMAIL = "user@expense.local";
@@ -29,6 +32,7 @@ public class DemoDataConfig {
             PasswordEncoder passwordEncoder
     ) {
         return args -> {
+<<<<<<< HEAD
             User admin = upsertDemoUser(
                     userRepository,
                     passwordEncoder,
@@ -46,6 +50,13 @@ public class DemoDataConfig {
                     USER_PASSWORD,
                     Role.USER
             );
+=======
+            upsertDemoUser(userRepository, passwordEncoder,
+                    "Demo Administrator", ADMIN_EMAIL, ADMIN_PASSWORD, Role.ADMIN);
+
+            User demoUser = upsertDemoUser(userRepository, passwordEncoder,
+                    "Demo User", USER_EMAIL, USER_PASSWORD, Role.USER);
+>>>>>>> ddc854d9aa2bb888f13a42a657cf261d844435f8
 
             if (expenseRepository.countByUserId(demoUser.getId()) == 0) {
                 saveExpense(expenseRepository, demoUser.getId(), "Groceries", "Food", "850.00", LocalDate.now(), "Weekly grocery shopping");
@@ -69,9 +80,13 @@ public class DemoDataConfig {
         user.setEmail(email);
         user.setRole(role);
         user.setEnabled(true);
+<<<<<<< HEAD
         if (user.getCreatedAt() == null) {
             user.setCreatedAt(Instant.now());
         }
+=======
+        if (user.getCreatedAt() == null) user.setCreatedAt(Instant.now());
+>>>>>>> ddc854d9aa2bb888f13a42a657cf261d844435f8
         if (user.getPassword() == null || !passwordEncoder.matches(plainPassword, user.getPassword())) {
             user.setPassword(passwordEncoder.encode(plainPassword));
         }

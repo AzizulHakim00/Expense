@@ -8,7 +8,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
+<<<<<<< HEAD
 
+=======
+>>>>>>> ddc854d9aa2bb888f13a42a657cf261d844435f8
     private final UserRepository userRepository;
 
     public CustomUserDetailsService(UserRepository userRepository) {

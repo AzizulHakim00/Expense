@@ -14,7 +14,10 @@ import java.util.List;
 
 @Service
 public class ExpenseService {
+<<<<<<< HEAD
 
+=======
+>>>>>>> ddc854d9aa2bb888f13a42a657cf261d844435f8
     private final ExpenseRepository expenseRepository;
 
     public ExpenseService(ExpenseRepository expenseRepository) {
@@ -28,14 +31,19 @@ public class ExpenseService {
     public List<Expense> weeklyForUser(String userId, LocalDate referenceDate) {
         LocalDate start = referenceDate.with(DayOfWeek.MONDAY);
         LocalDate end = start.plusDays(6);
+<<<<<<< HEAD
         return expenseRepository.findByUserIdAndExpenseDateBetweenOrderByExpenseDateDescCreatedAtDesc(
                 userId, start, end
         );
+=======
+        return expenseRepository.findByUserIdAndExpenseDateBetweenOrderByExpenseDateDescCreatedAtDesc(userId, start, end);
+>>>>>>> ddc854d9aa2bb888f13a42a657cf261d844435f8
     }
 
     public List<Expense> monthlyForUser(String userId, LocalDate referenceDate) {
         LocalDate start = referenceDate.with(TemporalAdjusters.firstDayOfMonth());
         LocalDate end = referenceDate.with(TemporalAdjusters.lastDayOfMonth());
+<<<<<<< HEAD
         return expenseRepository.findByUserIdAndExpenseDateBetweenOrderByExpenseDateDescCreatedAtDesc(
                 userId, start, end
         );
@@ -48,6 +56,14 @@ public class ExpenseService {
         if ("month".equalsIgnoreCase(period)) {
             return monthlyForUser(userId, referenceDate);
         }
+=======
+        return expenseRepository.findByUserIdAndExpenseDateBetweenOrderByExpenseDateDescCreatedAtDesc(userId, start, end);
+    }
+
+    public List<Expense> forPeriod(String userId, String period, LocalDate referenceDate) {
+        if ("week".equalsIgnoreCase(period)) return weeklyForUser(userId, referenceDate);
+        if ("month".equalsIgnoreCase(period)) return monthlyForUser(userId, referenceDate);
+>>>>>>> ddc854d9aa2bb888f13a42a657cf261d844435f8
         return allForUser(userId);
     }
 
@@ -75,8 +91,12 @@ public class ExpenseService {
     }
 
     public void deleteOwned(String userId, String expenseId) {
+<<<<<<< HEAD
         Expense expense = getOwned(userId, expenseId);
         expenseRepository.delete(expense);
+=======
+        expenseRepository.delete(getOwned(userId, expenseId));
+>>>>>>> ddc854d9aa2bb888f13a42a657cf261d844435f8
     }
 
     public List<Expense> allForAdmin() {
@@ -90,10 +110,13 @@ public class ExpenseService {
         expenseRepository.deleteById(expenseId);
     }
 
+<<<<<<< HEAD
     public long countAll() {
         return expenseRepository.count();
     }
 
+=======
+>>>>>>> ddc854d9aa2bb888f13a42a657cf261d844435f8
     public BigDecimal total(List<Expense> expenses) {
         return expenses.stream()
                 .map(Expense::getAmount)

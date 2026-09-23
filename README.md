@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Expense Tracker V2 - Fixed Core Project
 
 A simple Spring Boot + MongoDB expense tracker with separate login/register pages, USER/ADMIN roles, demo accounts, working expense CRUD, weekly/monthly tracking, Docker, and Render deployment support.
@@ -118,3 +119,8 @@ Your Atlas project must allow Render to connect. Configure Atlas Network Access 
 ## Important security note
 
 If a real database password has been pasted into chat, source code, or another exposed location, rotate it in MongoDB Atlas before a public deployment. Keep the replacement value only in local `.env` and Render Environment Variables.
+=======
+# Expense Tracker
+
+Spring Boot + MongoDB expense tracker with USER/ADMIN roles, full expense CRUD, weekly/monthly totals, Docker, and Render deployment.
+>>>>>>> ddc854d9aa2bb888f13a42a657cf261d844435f8
