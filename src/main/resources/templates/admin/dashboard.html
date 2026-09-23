@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Expense Tracker</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<header class="topbar">
+    <a class="brand" th:href="@{/admin/dashboard}">
+        <span class="brand-mark">ET</span>
+        <span>Expense Tracker</span>
+    </a>
+    <nav class="top-actions">
+        <span class="admin-badge">ADMIN</span>
+        <a class="btn ghost small" th:href="@{/dashboard}">My Expenses</a>
+        <form th:action="@{/logout}" method="post">
+            <button class="btn ghost small" type="submit">Logout</button>
+        </form>
+    </nav>
+</header>
+
+<main class="page-shell">
+    <div th:if="${successMessage}" class="alert success" th:text="${successMessage}"></div>
+    <div th:if="${errorMessage}" class="alert error" th:text="${errorMessage}"></div>
+
+    <section class="page-head">
+        <div>
+            <p class="eyebrow">ADMINISTRATION</p>
+            <h1>Admin dashboard</h1>
+            <p class="muted">Manage account status and review all recorded expenses.</p>
+        </div>
+        <span class="user-chip">
+            <strong th:text="${currentAdmin.fullName}">Administrator</strong>
+            <small th:text="${currentAdmin.email}">admin@expense.local</small>
+        </span>
+    </section>
+
+    <section class="stat-grid three">
+        <article class="stat-card">
+            <span>Total Users</span>
+            <strong th:text="${userCount}">0</strong>
+            <small>Registered accounts</small>
+        </article>
+        <article class="stat-card">
+            <span>Total Expenses</span>
+            <strong th:text="${expenseCount}">0</strong>
+            <small>All user records</small>
+        </article>
+        <article class="stat-card">
+            <span>Total Recorded Spend</span>
+            <strong>৳ <span th:text="${#numbers.formatDecimal(totalSpent, 1, 2)}">0.00</span></strong>
+            <small>Across all accounts</small>
+        </article>
+    </section>
+
+    <section class="panel admin-section">
+        <div class="panel-head">
+            <div>
+                <h2>Users</h2>
+                <p class="muted">Admin accounts are protected. User accounts can be enabled or disabled.</p>
+            </div>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                <tr><th>Name</th><th>Email</th><th>Role</th><th>Status</th><th>Action</th></tr>
+                </thead>
+                <tbody>
+                <tr th:each="account : ${users}">
+                    <td class="strong-cell" th:text="${account.fullName}">Name</td>
+                    <td th:text="${account.email}">email</td>
+                    <td><span class="role-pill" th:text="${account.role}">USER</span></td>
+                    <td>
+                        <span th:class="${account.enabled ? 'status active' : 'status disabled'}"
+                              th:text="${account.enabled ? 'Enabled' : 'Disabled'}">Enabled</span>
+                    </td>
+                    <td>
+                        <form th:if="${account.role.name() == 'USER'}"
+                              th:action="@{/admin/users/{id}/toggle(id=${account.id})}" method="post">
+                            <button class="action-link" type="submit"
+                                    th:text="${account.enabled ? 'Disable' : 'Enable'}">Disable</button>
+                        </form>
+                        <span class="muted" th:if="${account.role.name() == 'ADMIN'}">Protected</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="panel admin-section">
+        <div class="panel-head">
+            <div>
+                <h2>All Expenses</h2>
+                <p class="muted">Administrator overview of records stored in MongoDB.</p>
+            </div>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                <tr><th>Date</th><th>User</th><th>Title</th><th>Category</th><th>Amount</th><th>Action</th></tr>
+                </thead>
+                <tbody>
+                <tr th:each="expense : ${expenses}">
+                    <td th:text="${expense.expenseDate}">Date</td>
+                    <td th:text="${ownerEmails[expense.userId] ?: 'Unknown user'}">User</td>
+                    <td class="strong-cell" th:text="${expense.title}">Expense</td>
+                    <td><span class="category" th:text="${expense.category}">Food</span></td>
+                    <td class="money">৳ <span th:text="${#numbers.formatDecimal(expense.amount, 1, 2)}">0.00</span></td>
+                    <td>
+                        <form th:action="@{/admin/expenses/{id}/delete(id=${expense.id})}" method="post"
+                              onsubmit="return confirm('Delete this expense as administrator?');">
+                            <button class="action-link danger" type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(expenses)}">
+                    <td colspan="6" class="empty-state">No expense records found.</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+</body>
+</html>

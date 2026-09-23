@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Expense Tracker</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body class="auth-page">
+<main class="auth-wrap">
+    <section class="auth-card">
+        <div class="auth-form-side">
+            <a class="brand" th:href="@{/login}">
+                <span class="brand-mark">ET</span>
+                <span>Expense Tracker</span>
+            </a>
+
+            <div class="auth-heading">
+                <p class="eyebrow">WELCOME BACK</p>
+                <h1>Login to your account</h1>
+                <p>Track expenses, check weekly totals, and control your monthly spending.</p>
+            </div>
+
+            <div th:if="${errorMessage}" class="alert error" th:text="${errorMessage}"></div>
+            <div th:if="${successMessage}" class="alert success" th:text="${successMessage}"></div>
+
+            <form class="form-stack" th:action="@{/login}" method="post">
+                <div>
+                    <label for="email">Email</label>
+                    <input id="email" name="email" type="email" placeholder="you@example.com" required autofocus>
+                </div>
+                <div>
+                    <label for="password">Password</label>
+                    <input id="password" name="password" type="password" placeholder="Enter your password" required>
+                </div>
+                <button class="btn primary full" type="submit">Login</button>
+            </form>
+
+            <p class="auth-switch">New here? <a th:href="@{/register}">Create an account</a></p>
+
+            <div class="demo-box">
+                <div class="demo-title">
+                    <strong>Demo accounts</strong>
+                    <span>Click one to fill the login form</span>
+                </div>
+                <div class="demo-grid">
+                    <button type="button" class="demo-account" onclick="fillDemo('admin@expense.local','Admin123!')">
+                        <span class="demo-role admin">ADMIN</span>
+                        <strong>admin@expense.local</strong>
+                        <small>Password: Admin123!</small>
+                    </button>
+                    <button type="button" class="demo-account" onclick="fillDemo('user@expense.local','User123!')">
+                        <span class="demo-role user">USER</span>
+                        <strong>user@expense.local</strong>
+                        <small>Password: User123!</small>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <aside class="auth-art-side">
+            <img th:src="@{/images/auth-artwork.svg}" alt="Expense tracking illustration">
+            <h2>See where your money goes.</h2>
+            <p>Simple expense CRUD with weekly and monthly summaries.</p>
+        </aside>
+    </section>
+</main>
+<script>
+    function fillDemo(email, password) {
+        document.getElementById('email').value = email;
+        document.getElementById('password').value = password;
+        document.getElementById('email').focus();
+    }
+</script>
+</body>
+</html>

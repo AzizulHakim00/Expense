@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Expense Tracker</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body class="auth-page">
+<main class="auth-wrap register-wrap">
+    <section class="auth-card">
+        <div class="auth-form-side">
+            <a class="brand" th:href="@{/login}">
+                <span class="brand-mark">ET</span>
+                <span>Expense Tracker</span>
+            </a>
+
+            <div class="auth-heading">
+                <p class="eyebrow">CREATE ACCOUNT</p>
+                <h1>Start tracking your expenses</h1>
+                <p>Registered accounts are created with the USER role.</p>
+            </div>
+
+            <div th:if="${#fields.hasGlobalErrors()}" class="alert error">
+                <div th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+            </div>
+
+            <form class="form-stack" th:action="@{/register}" th:object="${registerRequest}" method="post">
+                <div>
+                    <label for="fullName">Full name</label>
+                    <input id="fullName" type="text" th:field="*{fullName}" placeholder="Your full name">
+                    <small class="field-error" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></small>
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input id="email" type="email" th:field="*{email}" placeholder="you@example.com">
+                    <small class="field-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
+                </div>
+                <div class="two-col-form">
+                    <div>
+                        <label for="password">Password</label>
+                        <input id="password" type="password" th:field="*{password}" placeholder="Minimum 6 characters">
+                        <small class="field-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></small>
+                    </div>
+                    <div>
+                        <label for="confirmPassword">Confirm password</label>
+                        <input id="confirmPassword" type="password" th:field="*{confirmPassword}" placeholder="Repeat password">
+                        <small class="field-error" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></small>
+                    </div>
+                </div>
+                <button class="btn primary full" type="submit">Create Account</button>
+            </form>
+
+            <p class="auth-switch">Already have an account? <a th:href="@{/login}">Back to login</a></p>
+        </div>
+
+        <aside class="auth-art-side">
+            <img th:src="@{/images/auth-artwork.svg}" alt="Expense tracking illustration">
+            <h2>Your spending, organized.</h2>
+            <p>Create, edit, delete, and review expenses from one simple dashboard.</p>
+        </aside>
+    </section>
+</main>
+</body>
+</html>
